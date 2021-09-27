@@ -1,0 +1,93 @@
+package chairez;
+
+/**
+ * 
+ * @author Justin Chairez
+ * @version 1.0
+ *
+ */
+public class Tiles{
+	
+	private String tiles;
+	private String combinations;
+	
+	/**
+	 * 
+	 * @param letters A String provided to the user and converted into a Tiles Object
+	 */
+	public Tiles(String letters)
+	{
+		tiles = letters;
+	}
+	
+	/**
+	 * @return Returns all the possible permutations of the given Srabble tiles
+	 */
+	public String Scramble() 
+	{
+		combinations = " ";
+		permute(tiles,0,tiles.length()-1);	
+		return combinations;
+	}
+	
+	/**
+	 * 
+	 * @return Validates if the user entered the correct amount of Scrabble tiles. Returns true if conditions are met and false if not
+	 */
+	public boolean validateInput() {
+		if( tiles.length() > 4 || tiles.contains("0") || tiles.contains("1") || tiles.contains("2") || tiles.contains("3") || tiles.contains("4") || tiles.contains("5") || tiles.contains("6") || tiles.contains("7") || tiles.contains("8") || tiles.contains("9")  ){
+			return false;
+			}
+		else
+		{
+			return true;
+		}
+	}
+	
+	/**
+	 * 
+	 * @param userInput Tiles given by the user, which form a "word"
+	 * @param left Start of where a letter will be swapped
+	 * @param right End of the Scrabble word
+	 */
+	
+	public void permute(String userInput, int left, int right)
+	{	
+
+		if( left != right )
+		{
+			for(int i = left; i < right; i++)
+			{
+				userInput = swap(userInput,left,i+1);
+				combinations += userInput + " ";
+				permute(userInput,left+1,right);
+			}
+		}
+		
+	}
+
+	
+
+	/**
+	 * 
+	 * @param inpt Tiles given by the user
+	 * @param i First tile to be swapped
+	 * @param j Second tile to be swapped
+	 * @return Returns a String which the swapped chars
+	 */
+	public String swap(String inpt, int i, int j)
+	{
+		String result = "";
+		char temp;
+		char[] chars = inpt.toCharArray();
+		
+		temp = chars[i];
+		chars[i] = chars[j];
+		chars[j] = temp;
+		
+		result = String.valueOf(chars);
+		
+		return result;
+	}
+
+}
