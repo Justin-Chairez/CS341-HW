@@ -25,9 +25,13 @@ public class Tiles{
 	 */
 	public String Scramble() 
 	{
-		combinations = " ";
-		permute(tiles,0,tiles.length()-1);	
-		return combinations;
+		//combinations = " ";
+		//permute(tiles,0,tiles.length()-1);
+		//return combinations;
+		
+		String results = " ";
+		results = permuteIM(tiles);
+		return results;
 	}
 	
 	/**
@@ -49,6 +53,7 @@ public class Tiles{
 	 * @param userInput Tiles given by the user, which form a "word"
 	 * @param left Start of where a letter will be swapped
 	 * @param right End of the Scrabble word
+	 * Attempt at recursive way
 	 */
 	
 	public void permute(String userInput, int left, int right)
@@ -65,6 +70,33 @@ public class Tiles{
 		}
 		
 	}
+	
+	/**
+	 * 
+	 * @param userInput Takes in the user's tiles to create all possible words
+	 * @return Returns a String of all possible words that can be formed with all tiles provide
+	 * Iterative method of finding all possible words from the given tiles
+	 */
+	public String permuteIM(String userInput)
+	{
+		//Combos will store all the possible words from the tiles given
+		String combos = "";
+		//Acts as a placeholder to compare for later results
+		String org = userInput;
+		
+		for( int i = 0; i < userInput.length(); i++)
+		{
+			for(int j = 0; j < userInput.length(); j++)
+			{
+				userInput = swap(userInput,j,i);
+				//Makes sure to not include the original "word" in the combinations
+				if(!org.equals(userInput)) {
+					combos += userInput + " ";
+				}
+			}
+		}
+		return combos;
+	}
 
 	
 
@@ -73,7 +105,7 @@ public class Tiles{
 	 * @param inpt Tiles given by the user
 	 * @param i First tile to be swapped
 	 * @param j Second tile to be swapped
-	 * @return Returns a String which the swapped chars
+	 * @return Returns a String with the swapped chars
 	 */
 	public String swap(String inpt, int i, int j)
 	{
