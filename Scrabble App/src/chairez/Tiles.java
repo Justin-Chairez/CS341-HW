@@ -9,7 +9,7 @@ package chairez;
 public class Tiles{
 	
 	private String tiles;
-	private String combinations;
+	private String permutations;
 	
 	/**
 	 * 
@@ -25,13 +25,15 @@ public class Tiles{
 	 */
 	public String Scramble() 
 	{
-		//combinations = " ";
-		//permute(tiles,0,tiles.length()-1);
-		//return combinations;
+		permutations = " ";
+		permuteTiles(tiles,"");
+		return permutations;
 		
+		/**
 		String results = " ";
 		results = permuteIM(tiles);
 		return results;
+		**/
 	}
 	
 	/**
@@ -64,7 +66,7 @@ public class Tiles{
 			for(int i = left; i < right; i++)
 			{
 				userInput = swap(userInput,left,i+1);
-				combinations += userInput + " ";
+				permutations += userInput + " ";
 				permute(userInput,left+1,right);
 			}
 		}
@@ -74,7 +76,7 @@ public class Tiles{
 	/**
 	 * 
 	 * @param userInput Takes in the user's tiles to create all possible words
-	 * @return Returns a String of all possible words that can be formed with all tiles provide
+	 * @return Returns a String of all possible words that can be formed with all tiles provide. Iterative method used here
 	 * Iterative method of finding all possible words from the given tiles
 	 */
 	public String permuteIM(String userInput)
@@ -96,6 +98,33 @@ public class Tiles{
 			}
 		}
 		return combos;
+	}
+	
+	/**
+	 * 
+	 * @param userTiles A Word that is provided by the user
+	 * @param choosen	The output of the current permutation assigned to the output variable
+	 * Solution for recursively finding all permutations
+	 */
+	public void permuteTiles(String userTiles, String choosen)
+	{
+		if(userTiles.length() == 0)
+		{
+			permutations += choosen + " ";
+		}else {
+			for(int i = 0; i < userTiles.length(); i++)
+			{
+				char c = userTiles.charAt(i);
+				choosen += c;
+				userTiles = userTiles.substring(0,i) + userTiles.substring(i+1);
+				
+				permuteTiles(userTiles,choosen);
+				
+				userTiles = userTiles.substring(0,i) + c + userTiles.substring(i);
+				
+				choosen = choosen.substring(0,choosen.length()-1);
+			}
+		}
 	}
 
 	
