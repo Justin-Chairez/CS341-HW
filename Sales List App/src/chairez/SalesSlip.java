@@ -31,7 +31,11 @@ public class SalesSlip {
 	 */
 	public void addItem(String n, String p, String q)
 	{
-		SalesItem consumerItem = new SalesItem(n,p,q);
+		SalesItem consumerItem = new SalesItem();
+		consumerItem.setName(n);
+		consumerItem.setPrice(p);
+		consumerItem.setQuantity(q);
+		//SalesItem consumerItem = SalesItem(n,p,q);
 		itemList.add(consumerItem);
 	}
 	

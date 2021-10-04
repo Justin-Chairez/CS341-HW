@@ -27,6 +27,13 @@ public class SalesItem {
 		quantity = Integer.parseInt(q);
 	}
 	
+	public SalesItem()
+	{
+		name = null;
+		price = 0.0;
+		quantity = 0;
+	}
+	
 	/**
 	 * 
 	 * @return Returns the name of the SalesItem as a String
@@ -49,6 +56,33 @@ public class SalesItem {
 	 */
 	public int getQuantity() {
 		return quantity;
+	}
+	
+	/**
+	 * 
+	 * @param n Sets the name of the SalesItem Object to String provided
+	 */
+	public void setName(String n)
+	{
+		name = n;
+	}
+	
+	/**
+	 * 
+	 * @param p Sets the price of the SalesItem Object to the String provided. Parses String to a double
+	 */
+	public void setPrice(String p)
+	{
+		price = Double.parseDouble(p);
+	}
+	
+	/**
+	 * 
+	 * @param q Sets the quantity of the SalesItem Object to the int provided. Parses String to an int
+	 */
+	public void setQuantity(String q)
+	{
+		quantity = Integer.parseInt(q);
 	}
 	
 	/**
