@@ -1,8 +1,14 @@
 package chairez;
 
+import java.util.ArrayList;
+
 public class Dictionary {
 	
+	//DATA MEMBER
 	private WordNode root;
+	
+	//VARIABLE USED FOR ASSERT TESTING
+	private ArrayList<String> userWords;
 	
 	public Dictionary() {
 		root = null;
@@ -48,10 +54,15 @@ public class Dictionary {
 		//MOVE RIGHT IF LESS THAN
 		while (true) {
 			//SCENARIO 1: THE WORD ALREADY EXISTS IN THE DICTIONARY
-			assert wordToAdd.getWord().compareToIgnoreCase(ptr.getWord()) != 0: "Pre-Condition: Duplicates can not exist in the tree";
+			if(wordToAdd.getWord().compareToIgnoreCase(ptr.getWord()) == 0)
+			{
+				break;
+			}
+			
+			//assert wordToAdd.getWord().compareToIgnoreCase(ptr.getWord()) != 0: "Duplicates can not exist in the tree";
 			
 			//SCENARIO 2: TRAVEL TO THE LEFT SIDE
-			if(wordToAdd.getWord().compareToIgnoreCase(ptr.getWord()) < 0)
+			else if(wordToAdd.getWord().compareToIgnoreCase(ptr.getWord()) < 0)
 			{
 				if(ptr.getLeftNode() != null)
 				{
@@ -62,21 +73,19 @@ public class Dictionary {
 					//System.out.println("Ptr value: " + ptr.getWord());
 					//System.out.println("Left node value: " + ptr.getLeftNode().getWord());
 					assert ptr.getWord().compareToIgnoreCase(ptr.getLeftNode().getWord()) > 0: "Post-condition: Inserted word is not smaller than it's parent";
-
 					break;
 				}
 			}
 
 			//SCENARIO 3: TRAVEL TO THE RIGHT SIDE
-			else if (wordToAdd.getWord().compareToIgnoreCase(ptr.getWord()) > 0)
+			else
 			{
 				if(ptr.getRightNode() != null)
 				{
 					ptr = ptr.getRightNode();
 				}else {
 					ptr.setRightNode(wordToAdd);
-					assert ptr.getWord().compareToIgnoreCase(ptr.getRightNode().getWord()) < 0: "Post-condition: Inserted word is not smaller than it's parent";
-
+					assert ptr.getWord().compareToIgnoreCase(ptr.getRightNode().getWord()) < 0: "Post-condition: Inserted word is not larger than it's parent";
 					break;
 				}
 			}
@@ -93,6 +102,7 @@ public class Dictionary {
 	public void checkWord(String deleteWord)
 	{
 		WordNode temp = root;
+		assert temp != null: "BST is currently empty";
 		temp = deleteIterative(root,deleteWord);
 	}
 	
@@ -173,7 +183,7 @@ public class Dictionary {
 		//HAVE TO MOVE THE NEXT HIGHEST SUCCESOR TO THE REMOVED NODE'S LOCATION
 		else {
 			
-			assert ptr.getLeftNode() != null && ptr.getRightNode() != null: "Pre-condition: Node to be removed must have two children";
+			//assert ptr.getLeftNode() != null && ptr.getRightNode() != null: "Pre-condition: Node to be removed must have two children";
 			WordNode parent = null;
 			WordNode tempPtr = null;
 			
@@ -215,10 +225,18 @@ public class Dictionary {
 	 */
 	public void displayDictionary()
 	{
-		assert !(isEmpty()): "Pre-Condition: Tree is empty!";
+		userWords = new ArrayList<String>();
+		
+		assert alphabeticalOrder(): "Binary Search Tree is not in Alphabetical Order";
 		inOrderRecursive(root);
+		//System.out.println("ArrayList Words: " + userWords.toString());
+
 	}
 
+	/**
+	 * Helper method for displayDictionary that recursively
+	 * @param ptr Passes in the Root node as a ptr to transverse the tree
+	 */
 	
 	private void inOrderRecursive(WordNode ptr)
 	{
@@ -226,10 +244,16 @@ public class Dictionary {
 		{
 			inOrderRecursive(ptr.getLeftNode());
 			System.out.println(ptr.getWord());
+			userWords.add(ptr.getWord());
 			inOrderRecursive(ptr.getRightNode());
 		}
 	}
 	
+	/**
+	 * Assumes the word to be checked exists in the current Dictionary Values. Iteratively passes through the Dictionary From left to right, until the value is either found or not.
+	 * @param addW Passes in the word to be checked as String to compare against the current Dictionary Values
+	 * @return Retruns true if the word was found. Returns false if the word was not found or does not exist in the three
+	 */
 	public Boolean spellCheck(String addW)
 	{
 		WordNode temp = new WordNode(addW);
@@ -285,4 +309,25 @@ public class Dictionary {
 		}
 	}
 
+	/**
+	 * Assert helper method to assure all words in the BST are in alphabetical order
+	 * @return Returns true if all words in the BST are in alphabetical order. Else it will return false if a words is found to not be alphabetical order
+	 */
+	private Boolean alphabeticalOrder()
+	{
+		Boolean isTrue = true;
+		for(int i = 0; i < userWords.size()-1; i++ )
+		{
+			if( userWords.get(i).compareTo(userWords.get(i+1)) < 0 )
+			{
+				isTrue = true;
+			}
+			else
+			{
+				isTrue = false;
+			}
+		}
+		
+		return isTrue;
+	}
 }
