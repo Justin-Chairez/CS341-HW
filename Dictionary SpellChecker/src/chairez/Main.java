@@ -26,12 +26,14 @@ public class Main {
 		argDictionary.displayDictionary();
 
 		//Testing to see if spell check functions properly
-		System.out.println("Spell check for first: " + argDictionary.spellCheck("first"));
-		System.out.println("Spell check for dishes: " + argDictionary.spellCheck("dishes"));
-		System.out.println("Spell check for your: " + argDictionary.spellCheck("your"));
+		System.out.println("Spell check for 'first': " + argDictionary.spellCheck("first"));
+		System.out.println("Spell check for 'dishes': " + argDictionary.spellCheck("dishes"));
+		System.out.println("Spell check for 'your': " + argDictionary.spellCheck("your"));
 
 
-		
+		System.out.println();
+		System.out.println();
+
 		System.out.println("Original Dictionary Values: ");
 		dictionary.insertWordNode("batt");
 		dictionary.insertWordNode("cat");
