@@ -1,6 +1,8 @@
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -8,13 +10,14 @@ import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
 
-public class Canvas extends JComponent implements ActionListener{
+public class Canvas extends JComponent implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	
 	//DATA MEMBERS: WINDOW, GAME LOOP, LIST OF GAME OBJECTS
 	private JFrame frame;
 	private Timer gameLoopTimer;
 	private List <GameObject> gameObjectList;
+	private int highlighted = 0;
 	
 	//CONSTRUCTOR
 	public Canvas() {
@@ -28,9 +31,12 @@ public class Canvas extends JComponent implements ActionListener{
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.add(this);
 		
-		//TASK 3: CONSTRUCT A TIMER AND START IT
+		//TASK 3: CONSTRUCT A TIMER AND START IT	
 		gameLoopTimer = new Timer(25,this);
 		gameLoopTimer.start();
+		
+		setFocusTraversalKeysEnabled(false);
+		addKeyListener((KeyListener) this);
 		
 		//TASK 4: MAKE THE WINDOW VISIBLE
 		frame.setVisible(true);
@@ -43,7 +49,8 @@ public class Canvas extends JComponent implements ActionListener{
 	
 	//METHOD PAINT
 	public synchronized void paint(Graphics g) {
-		for (GameObject gObject: gameObjectList) {
+		for (GameObject gObject: gameObjectList) 
+		{
 			gObject.draw(this, g);
 		}
 	}
@@ -56,8 +63,28 @@ public class Canvas extends JComponent implements ActionListener{
 		for(GameObject gameObject: gameObjectList)
 		{
 			gameObject.move(this);
+			gameObject.setImage();
 		}
 		repaint();
+	}
+	
+	public void keyTyped(KeyEvent e) {
+		
+	}
+	
+	public void keyPressed(KeyEvent e) {
+		
+	}
+	
+	public void keyReleased(KeyEvent e) {
+		if(e.getKeyCode() == KeyEvent.VK_TAB) {
+			highlighted = highlighted + 1;
+			if (highlighted == gameObjectList.size()) {
+				highlighted = 0;
+			}
+		}
+		GameObject s = gameObjectList.get(highlighted);
+		s.setVelocity(s.getVelocity()+1);
 	}
 	
 }

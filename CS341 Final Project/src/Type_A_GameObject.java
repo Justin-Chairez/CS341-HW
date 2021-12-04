@@ -5,19 +5,19 @@ import java.util.LinkedList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class Type_D_GameObject extends GameObject implements KeyListener {
-	
-	public Type_D_GameObject(int x, int y) {
+public class Type_A_GameObject extends GameObject implements KeyListener {
+
+	public Type_A_GameObject(int x, int y)
+	{
 		super(x,y);
 		setDirection(Direction.NONE);
 		
+		
 		imageList = new LinkedList<Icon>();
-		imageList.add(new ImageIcon("images/Type_D_Up.png"));
-		imageList.add(new ImageIcon("images/Type_D_Down.png"));
-		imageList.add(new ImageIcon("images/Type_D_Left.png"));
-		imageList.add(new ImageIcon("images/Type_D_Right.png"));
+		imageList.add(new ImageIcon("images/Type_A_Up.png"));
+		imageList.add(new ImageIcon("images/Type_A_Down.png"));
 	}
-
+	
 	public void move(Canvas c) {
 		Icon icon = getCurrentImage();
 		
@@ -26,39 +26,25 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 		int canvasHeight = (int)c.getSize().getHeight();
 		int canvasWidth = (int)c.getSize().getWidth();
 		
-		switch (getDirection()) {
+		switch(getDirection()) {
 			case Direction.UP:
 				setY(getY() - getVelocity());
 				if(getY() < 0) {
 					setY(0);
 					setDirection(Direction.DOWN);
-
 				}
-			break;
-		case  Direction.DOWN:
-			setY(getY() + getVelocity());
-			if(getX() + iconWidth > canvasWidth) {
-				setX((int)(canvasWidth - iconWidth));
-				setDirection(Direction.UP);
-			}
-			break;
-		case Direction.LEFT:
-			setX(getX() + getVelocity());
-			if(getX() + iconWidth > canvasWidth) {
-				setX((int)(canvasWidth - iconWidth));
-				setDirection(Direction.RIGHT);
-			}
-			break;
-		case Direction.RIGHT:
-			setX(getX() - getVelocity());
-			if(getX()  < 0) {
-				setX(0);
-				setDirection(Direction.LEFT);
-			}
-			break;
+				break;
+			case Direction.DOWN:
+				setY(getY() + getVelocity());
+				if(getX() + iconWidth > canvasWidth) {
+					setX((int)(canvasWidth - iconWidth));
+					setDirection(Direction.UP);
+				}
+				break;
 			default:
 				break;
 		}
+		
 	}
 	
 	public void setImage() {
@@ -70,12 +56,6 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 			break;
 		case Direction.DOWN:
 			currentImage = 1;
-			break;
-		case Direction.LEFT:
-			currentImage = 2;
-			break;
-		case Direction.RIGHT:
-			currentImage = 3;
 			break;
 		}
 	}
@@ -97,11 +77,6 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 		if(e.getKeyCode() == KeyEvent.VK_DOWN) {
 			setDirection(Direction.DOWN);
 		}
-		if(e.getKeyCode() == KeyEvent.VK_RIGHT) {
-			setDirection(Direction.LEFT);
-		}
-		if(e.getKeyCode() == KeyEvent.VK_LEFT) {
-			setDirection(Direction.RIGHT);
-		}
 	}
+
 }

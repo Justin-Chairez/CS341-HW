@@ -13,22 +13,24 @@ public abstract class GameObject {
 	private int direction;
 	
 	
-	protected Icon myImage;
 	protected List<Icon> imageList;
+	protected int currentImage;
 
 	public GameObject(int x, int y) {
 		this.x = x;
 		this.y = y;
 		velocity = 1;
+		currentImage = 0;
 	}
 	
 	public void draw(Component c, Graphics g)
 	{
-		myImage.paintIcon(c, g, x, y);
+		imageList.get(currentImage).paintIcon(c, g, x, y);
 	}
 	
 	//ABSTRACT METHOD: MOVEMENT OF THE GAME OBJECT
 	public abstract void move (Canvas c);
+	public abstract void setImage();
 
 	//SETTERS AND GETTERS
 	public int getX() {
@@ -61,6 +63,10 @@ public abstract class GameObject {
 
 	public void setDirection(int direction) {
 		this.direction = direction;
+	}
+	
+	public Icon getCurrentImage() {
+		return imageList.get(currentImage);
 	}
 		
 }
