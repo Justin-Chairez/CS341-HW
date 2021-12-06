@@ -11,8 +11,8 @@ public abstract class GameObject {
 	private int y;
 	private int velocity;
 	private int direction;
-	
-	
+	private boolean isHighlighted;
+		
 	protected List<Icon> imageList;
 	protected int currentImage;
 
@@ -21,6 +21,7 @@ public abstract class GameObject {
 		this.y = y;
 		velocity = 1;
 		currentImage = 0;
+		isHighlighted = false;
 	}
 	
 	public void draw(Component c, Graphics g)
@@ -67,6 +68,16 @@ public abstract class GameObject {
 	
 	public Icon getCurrentImage() {
 		return imageList.get(currentImage);
+	}
+	
+	public Boolean getHighLighted()
+	{
+		return isHighlighted;
+	}
+	
+	public void setHighLighted(Boolean state)
+	{
+		isHighlighted = state;
 	}
 		
 }

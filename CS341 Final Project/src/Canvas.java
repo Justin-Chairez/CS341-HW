@@ -9,6 +9,7 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
+import javax.swing.border.Border;
 
 public class Canvas extends JComponent implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
@@ -53,19 +54,21 @@ public class Canvas extends JComponent implements ActionListener, KeyListener{
 		{
 			gObject.draw(this, g);
 		}
+				
 	}
 	
 	//METHODS WE NEED
 	//Canvas must implement the inherited abstract method
 	//ActionListener.actionPerformed
 	public synchronized void actionPerformed(ActionEvent e) {
-		//task: loop through all the game objects and display them
+
 		for(GameObject gameObject: gameObjectList)
 		{
-			gameObject.move(this);
-			gameObject.setImage();
+				gameObject.move(this);
+				gameObject.setImage();
 		}
-		repaint();
+		repaint();		
+			
 	}
 	
 	public void keyTyped(KeyEvent e) {
@@ -83,8 +86,15 @@ public class Canvas extends JComponent implements ActionListener, KeyListener{
 				highlighted = 0;
 			}
 		}
+		
+		for(GameObject gameObject: gameObjectList)
+		{
+			gameObject.setHighLighted(false);
+		}
+		
 		GameObject s = gameObjectList.get(highlighted);
-		s.setVelocity(s.getVelocity()+1);
+		s.setVelocity(s.getVelocity());
+		s.setHighLighted(true);
 	}
 	
 }
