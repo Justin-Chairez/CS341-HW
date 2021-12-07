@@ -36,8 +36,8 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 				break;
 			case Direction.DOWN:
 				setY(getY() + getVelocity());
-				if (getX() + iconHeight > canvasHeight) {
-					setX((int) (canvasHeight - iconHeight));
+				if (getY() + iconHeight > canvasHeight) {
+					setY((int) (canvasHeight - iconHeight));
 					setDirection(Direction.UP);
 				}
 				break;

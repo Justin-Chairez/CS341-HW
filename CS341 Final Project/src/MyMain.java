@@ -20,7 +20,7 @@ public class MyMain {
 		canvas.addKeyListener(objD);
 		canvas.addGameObject(objD);
 				
-		Type_B_GameObject objB = new Type_B_GameObject(objA);
+		Type_B_GameObject objB = new Type_B_GameObject(objD);
 		objB.setVelocity(10);
 		canvas.addKeyListener(objB);
 		canvas.addGameObject(objB);

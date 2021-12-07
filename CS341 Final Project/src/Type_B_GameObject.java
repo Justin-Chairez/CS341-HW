@@ -43,8 +43,8 @@ public class Type_B_GameObject extends GameObject implements TypeBAdapter, KeyLi
 				break;
 			case Direction.DOWN:
 				setY(getY() + getVelocity());
-				if (getX() + iconHeight > canvasHeight) {
-					setX((int) (canvasHeight - iconHeight));
+				if (getY() + iconHeight > canvasHeight) {
+					setY((int) (canvasHeight - iconHeight));
 					setDirection(Direction.UP);
 				}
 				break;
@@ -69,14 +69,14 @@ public class Type_B_GameObject extends GameObject implements TypeBAdapter, KeyLi
 
 			if (getDirection() == Direction.RIGHT) {
 				setX(getX() + getVelocity());
-				if (getX() + iconWidth > c.getSize().getWidth()) {
-					setX((int) (c.getSize().getWidth() - iconWidth));
+				if (getX() + iconHeight > canvasWidth) {
+					setX((int) (canvasWidth - iconWidth));
 					setDirection(Direction.DOWN);
 				}
 			} else if (getDirection() == Direction.DOWN) {
 				setY(getY() + getVelocity());
-				if (getY() + iconWidth > c.getSize().getWidth()) {
-					setY((int) (c.getSize().getWidth() - iconWidth));
+				if (getY() + iconWidth > canvasWidth) {
+					setY((int) (canvasWidth - iconWidth));
 					setDirection(Direction.LEFT);
 				}
 			} else if (getDirection() == Direction.LEFT) {

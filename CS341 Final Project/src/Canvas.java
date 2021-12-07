@@ -9,7 +9,6 @@ import java.util.List;
 import javax.swing.JComponent;
 import javax.swing.JFrame;
 import javax.swing.Timer;
-import javax.swing.border.Border;
 
 public class Canvas extends JComponent implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
