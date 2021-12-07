@@ -5,57 +5,149 @@ import java.util.LinkedList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
-public class Type_B_GameObject implements TypeBAdapter {
-	
-	private Type_D_GameObject d;
-	
-	public Type_B_GameObject(Type_D_GameObject d)
-	{
-		this.d = d;
-		
+public class Type_B_GameObject extends GameObject implements TypeBAdapter, KeyListener {
+
+	GameObject gameObject;
+
+	public Type_B_GameObject(GameObject go) {
+		super(go.getX(), go.getY());
+		gameObject = go;
+		setDirection(Direction.NONE);
+
+		imageList = new LinkedList<Icon>();
+		imageList.add(new ImageIcon("images/Type_B__Up.png"));
+		imageList.add(new ImageIcon("images/Type_B_Down.png"));
+		imageList.add(new ImageIcon("images/Type_B_Left.png"));
+		imageList.add(new ImageIcon("images/Type_B_Right.png"));
 	}
 
+	@Override
 	public void move(Canvas c) {
-		Icon icon = d.getCurrentImage();
+
+		Icon icon = getCurrentImage();
 
 		int iconHeight = icon.getIconHeight();
 		int iconWidth = icon.getIconWidth();
 		int canvasHeight = (int) c.getSize().getHeight();
 		int canvasWidth = (int) c.getSize().getWidth();
 
-		switch (d.getDirection()) {
-		case Direction.UP:
-			d.setY(d.getY() - d.getVelocity());
-			if (d.getY() < 0) {
-				d.setY(0);
-				d.setDirection(Direction.DOWN);
+		if (getHighLighted()) {
+			switch (getDirection()) {
+			case Direction.UP:
+				setY(getY() - getVelocity());
+				if (getY() < 0) {
+					setY(0);
+					setDirection(Direction.DOWN);
 
+				}
+				break;
+			case Direction.DOWN:
+				setY(getY() + getVelocity());
+				if (getX() + iconHeight > canvasHeight) {
+					setX((int) (canvasHeight - iconHeight));
+					setDirection(Direction.UP);
+				}
+				break;
+			case Direction.LEFT:
+				setX(getX() + getVelocity());
+				if (getX() + iconWidth > canvasWidth) {
+					setX((int) (canvasWidth - iconWidth));
+					setDirection(Direction.RIGHT);
+				}
+				break;
+			case Direction.RIGHT:
+				setX(getX() - getVelocity());
+				if (getX() < 0) {
+					setX(0);
+					setDirection(Direction.LEFT);
+				}
+				break;
+			default:
+				break;
 			}
+		} else {
+
+			if (getDirection() == Direction.RIGHT) {
+				setX(getX() + getVelocity());
+				if (getX() + iconWidth > c.getSize().getWidth()) {
+					setX((int) (c.getSize().getWidth() - iconWidth));
+					setDirection(Direction.DOWN);
+				}
+			} else if (getDirection() == Direction.DOWN) {
+				setY(getY() + getVelocity());
+				if (getY() + iconWidth > c.getSize().getWidth()) {
+					setY((int) (c.getSize().getWidth() - iconWidth));
+					setDirection(Direction.LEFT);
+				}
+			} else if (getDirection() == Direction.LEFT) {
+				setX(getX() - getVelocity());
+				if (getX() < 0) {
+					setX(0);
+					setDirection(Direction.UP);
+				}
+			} else {
+				setY(getY() - getVelocity());
+				if (getY() < 0) {
+					setY(0);
+					setDirection(Direction.RIGHT);
+				}
+			}
+		}
+	}
+
+	@Override
+	public void setImage() {
+		switch (getDirection()) {
+		case Direction.NONE:
+			break;
+		case Direction.UP:
+			currentImage = 0;
 			break;
 		case Direction.DOWN:
-			d.setY(d.getY() + d.getVelocity());
-			if (d.getX() + iconHeight > canvasHeight) {
-				d.setX((int) (canvasHeight - iconHeight));
-				d.setDirection(Direction.UP);
-			}
+			currentImage = 1;
 			break;
 		case Direction.LEFT:
-			d.setX(d.getX() + d.getVelocity());
-			if (d.getX() + iconWidth > canvasWidth) {
-				d.setX((int) (canvasWidth - iconWidth));
-				d.setDirection(Direction.RIGHT);
-			}
+			currentImage = 2;
 			break;
 		case Direction.RIGHT:
-			d.setX(d.getX() - d.getVelocity());
-			if (d.getX() < 0) {
-				d.setX(0);
-				d.setDirection(Direction.LEFT);
-			}
-			break;
-		default:
+			currentImage = 3;
 			break;
 		}
 	}
 
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if (getHighLighted()) {
+			if (e.getKeyCode() == KeyEvent.VK_TAB) {
+				setDirection(Direction.NONE);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_UP) {
+				setDirection(Direction.UP);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_DOWN) {
+				setDirection(Direction.DOWN);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
+				setDirection(Direction.LEFT);
+			}
+			if (e.getKeyCode() == KeyEvent.VK_LEFT) {
+				setDirection(Direction.RIGHT);
+			}
+		}
+	}
+
+	@Override
+	public void keyReleased(KeyEvent e) {
+		if (getHighLighted()) {
+			if (e.getKeyCode() != KeyEvent.VK_TAB) {
+				setDirection(Direction.NONE);
+			}
+		}
+	}
+
+	@Override
+	public void keyTyped(KeyEvent e) {
+		// TODO Auto-generated method stub
+
+	}
 }

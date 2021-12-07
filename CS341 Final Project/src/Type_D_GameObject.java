@@ -32,7 +32,6 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 				if (getY() < 0) {
 					setY(0);
 					setDirection(Direction.DOWN);
-
 				}
 				break;
 			case Direction.DOWN:
@@ -95,9 +94,6 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 
 	public void keyPressed(KeyEvent e) {
 		if (getHighLighted()) {
-			if (e.getKeyCode() == KeyEvent.VK_TAB) {
-				setDirection(Direction.NONE);
-			}
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				setDirection(Direction.UP);
 			}
