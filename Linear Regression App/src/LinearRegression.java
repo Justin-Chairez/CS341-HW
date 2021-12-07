@@ -10,10 +10,10 @@ public class LinearRegression
 	 * Constructor for the Linear Regression Model
 	 * Takes in two ArrayLists of type Double. HD is representative of hours spent coding, while BD is representative of bugs encountered while coding
 	 */
-	public LinearRegression(ArrayList<Double> hd, ArrayList<Double> bd)
+	public LinearRegression(ArrayList<Double> xValues, ArrayList<Double> yValues)
 	{
-		xData = hd;
-		yData = bd;
+		xData = xValues;
+		yData = yValues;
 	}
 	
 	/**
@@ -23,6 +23,11 @@ public class LinearRegression
 	 */
 	public Integer predictForValue (int predictForDependentVariable)
 	{
+		if(predictForDependentVariable <= 0)
+		{
+			throw new IllegalStateException("Predict Value Must be greater than 0");
+		}
+		
 		//PRELIMINARY WORK
 		// VERIFY THE DATA SETS ARE CORRECT
 		if (xData.size() != yData.size())

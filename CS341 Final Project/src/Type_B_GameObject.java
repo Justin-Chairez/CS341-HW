@@ -38,7 +38,6 @@ public class Type_B_GameObject extends GameObject implements TypeBAdapter, KeyLi
 				if (getY() < 0) {
 					setY(0);
 					setDirection(Direction.DOWN);
-
 				}
 				break;
 			case Direction.DOWN:
@@ -69,7 +68,7 @@ public class Type_B_GameObject extends GameObject implements TypeBAdapter, KeyLi
 
 			if (getDirection() == Direction.RIGHT) {
 				setX(getX() + getVelocity());
-				if (getX() + iconHeight > canvasWidth) {
+				if (getX() + iconWidth > canvasWidth) {
 					setX((int) (canvasWidth - iconWidth));
 					setDirection(Direction.DOWN);
 				}
@@ -107,10 +106,10 @@ public class Type_B_GameObject extends GameObject implements TypeBAdapter, KeyLi
 			currentImage = 1;
 			break;
 		case Direction.LEFT:
-			currentImage = 2;
+			currentImage = 3;
 			break;
 		case Direction.RIGHT:
-			currentImage = 3;
+			currentImage = 2;
 			break;
 		}
 	}

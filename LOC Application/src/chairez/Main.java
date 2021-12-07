@@ -19,7 +19,7 @@ public class Main {
 			LOCCounter2 checker = new LOCCounter2();
 			checker.addFile(fileScan);
 			System.out.println(checker.linesCount());
-			checker.findMCS();
+			//checker.findMCS();
 			System.out.println(checker.countMCS());
 		}
 		catch (FileNotFoundException e) 
