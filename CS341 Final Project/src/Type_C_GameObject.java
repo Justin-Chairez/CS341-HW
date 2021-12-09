@@ -87,6 +87,9 @@ public class Type_C_GameObject extends GameObject implements KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_TAB) {
+			setDirection(Direction.NONE);
+		}
 		if (getHighLighted()) {
 			if (e.getKeyCode() == KeyEvent.VK_RIGHT) {
 				setDirection(Direction.LEFT);

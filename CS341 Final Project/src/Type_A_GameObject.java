@@ -43,7 +43,8 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 			default:
 				break;
 			}
-		} else {
+		} 
+		else {
 			if (getDirection() == Direction.UP) {
 				setY(getY() - getVelocity());
 				if (getY() < 0) {
@@ -58,6 +59,7 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 				}
 			}
 		}
+		
 
 	}
 
@@ -87,6 +89,9 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 	}
 
 	public void keyPressed(KeyEvent e) {
+		if (e.getKeyCode() == KeyEvent.VK_TAB) {
+			setDirection(Direction.NONE);
+		}
 		if (getHighLighted()) {
 			if (e.getKeyCode() == KeyEvent.VK_UP) {
 				setDirection(Direction.UP);
