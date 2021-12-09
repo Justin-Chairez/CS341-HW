@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
@@ -110,5 +113,16 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 				setDirection(Direction.RIGHT);
 			}
 		}
+	}
+	
+	@Override
+	public void highlight(Component c, Graphics g) {
+		Icon icon = imageList.get(currentImage);
+		int height = icon.getIconHeight();
+		int width = icon.getIconWidth();
+		
+		g.setColor(Color.red);
+		g.draw3DRect( getX(), getY(), width, height, true);
+				
 	}
 }

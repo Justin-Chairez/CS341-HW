@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
@@ -16,6 +19,11 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 		imageList.add(new ImageIcon("images/Type_A_Down.png"));
 	}
 
+	/**
+	 * Moves the GameObject Left and Right
+	 * Uses switch statements for KeyPressed Movements
+	 * Uses If Statements to move automatically, according to the timer in  Canvas.java
+	 */
 	public void move(Canvas c) {
 		Icon icon = getCurrentImage();
 
@@ -30,14 +38,14 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 				setY(getY() - getVelocity());
 				if (getY() < 0) {
 					setY(0);
-					setDirection(Direction.DOWN);
+					//setDirection(Direction.DOWN);
 				}
 				break;
 			case Direction.DOWN:
 				setY(getY() + getVelocity());
 				if (getY() + iconHeight > canvasHeight) {
 					setY((int) (canvasHeight - iconHeight));
-					setDirection(Direction.UP);
+					//setDirection(Direction.UP);
 				}
 				break;
 			default:
@@ -100,6 +108,17 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 				setDirection(Direction.DOWN);
 			}
 		}
+	}
+
+	@Override
+	public void highlight (Component c, Graphics g) {
+		Icon icon = imageList.get(currentImage);
+		int height = icon.getIconHeight();
+		int width = icon.getIconWidth();
+		
+		g.setColor(Color.red);
+		g.draw3DRect( getX(), getY(), width, height, true);
+				
 	}
 
 }

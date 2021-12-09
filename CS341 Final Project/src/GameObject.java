@@ -32,6 +32,7 @@ public abstract class GameObject {
 	//ABSTRACT METHOD: MOVEMENT OF THE GAME OBJECT
 	public abstract void move (Canvas c);
 	public abstract void setImage();
+	public abstract void highlight(Component c, Graphics g);
 
 	//SETTERS AND GETTERS
 	public int getX() {

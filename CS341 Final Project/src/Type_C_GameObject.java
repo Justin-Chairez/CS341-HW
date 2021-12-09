@@ -1,3 +1,6 @@
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.util.LinkedList;
@@ -31,14 +34,14 @@ public class Type_C_GameObject extends GameObject implements KeyListener {
 				setX(getX() + getVelocity());
 				if (getX() + iconWidth > canvasWidth) {
 					setX((int) (canvasWidth - iconWidth));
-					setDirection(Direction.RIGHT);
+					//setDirection(Direction.RIGHT);
 				}
 				break;
 			case Direction.RIGHT:
 				setX(getX() - getVelocity());
 				if (getX() < 0) {
 					setX(0);
-					setDirection(Direction.LEFT);
+					//setDirection(Direction.LEFT);
 				}
 				break;
 			default:
@@ -98,5 +101,16 @@ public class Type_C_GameObject extends GameObject implements KeyListener {
 				setDirection(Direction.RIGHT);
 			}
 		}
+	}
+	
+	@Override
+	public void highlight(Component c, Graphics g) {
+		Icon icon = imageList.get(currentImage);
+		int height = icon.getIconHeight();
+		int width = icon.getIconWidth();
+		
+		g.setColor(Color.red);
+		g.draw3DRect( getX(), getY(), width, height, true);
+				
 	}
 }

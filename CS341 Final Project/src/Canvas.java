@@ -72,6 +72,7 @@ public class Canvas extends JComponent implements ActionListener, KeyListener{
 		for (GameObject gObject: gameObjectList) 
 		{
 			gObject.draw(this, g);
+			gameObjectList.get(highlighted).highlight(this, g);
 		}
 				
 	}
