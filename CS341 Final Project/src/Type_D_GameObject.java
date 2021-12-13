@@ -8,8 +8,18 @@ import java.util.LinkedList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+/**
+ * Type D GameObject with movement for any directions. Only move the GameObject when highlighted and a key is pressed
+ * @author jtcha
+ *
+ */
 public class Type_D_GameObject extends GameObject implements KeyListener {
 
+	/**
+	 * Constructor for the D GameObject. Creates imageList for the Object and calls the Super constructor from GameObject
+	 * @param x X cordinate for where to place on the Canvas
+	 * @param y Y Coordinate for where to place on the Canvas
+	 */
 	public Type_D_GameObject(int x, int y) {
 		super(x, y);
 		setDirection(Direction.NONE);
@@ -21,6 +31,10 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 		imageList.add(new ImageIcon("images/Type_D_Right.png"));
 	}
 
+	/**
+	 * Allows the GameObject the capability to move any direction when a key is pressed
+	 * @param C Takes in the Canvas Object in wich to draw the image
+	 */
 	public void move(Canvas c) {
 		Icon icon = getCurrentImage();
 
@@ -64,6 +78,9 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 		}
 	}
 
+	/**
+	 * Changes the image when a the object direction changes
+	 */
 	public void setImage() {
 		switch (getDirection()) {
 		case Direction.NONE:
@@ -87,6 +104,9 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 
 	}
 
+	/**
+	 * @param e Keeps track of what key was released
+	 */
 	public void keyReleased(KeyEvent e) {
 		if (getHighLighted()) {
 			if (e.getKeyCode() != KeyEvent.VK_TAB) {
@@ -95,6 +115,10 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 		}
 	}
 
+	/**
+	 * Moves the image in the direction associated with the key pressed
+	 * @param e Keeps track of what key was released
+	 */
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_TAB) {
 			setDirection(Direction.NONE);
@@ -115,6 +139,11 @@ public class Type_D_GameObject extends GameObject implements KeyListener {
 		}
 	}
 	
+	/**
+	 * Draws a red highlight around the current image of the choosen object
+	 * @param C Takes in a component
+	 * @param Takes in a graphic
+	 */
 	@Override
 	public void highlight(Component c, Graphics g) {
 		Icon icon = imageList.get(currentImage);

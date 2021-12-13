@@ -1,4 +1,9 @@
 
+/**
+ * Creates static variables to keep track of what Direction is associated with a key pressed
+ * @author jtcha
+ *
+ */
 public class Direction {
 
 	public static final int NONE = 0;

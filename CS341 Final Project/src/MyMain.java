@@ -7,8 +7,7 @@ public class MyMain {
 		Type_A_GameObject objA = new Type_A_GameObject(400,400);
 		objA.setVelocity(10);
 		canvas.addKeyListener(objA);
-		canvas.addGameObject(objA);
-		
+		canvas.addGameObject(objA);		
 	
 		Type_C_GameObject objC = new Type_C_GameObject(300, 300);
 		objC.setVelocity(10);
@@ -25,12 +24,19 @@ public class MyMain {
 		objB.setVelocity(10);
 		canvas.addKeyListener(objB);
 		canvas.addGameObject(objB);
-		*/
+		
 		
 		Type_B_GameObject objB = new Type_B_GameObject(objA);
 		objB.setVelocity(10);
 		canvas.addKeyListener(objB);
 		canvas.addGameObject(objB);
+			*/
+
+		Type_B_SB BSandBox = new Type_B_SB(objA);
+		BSandBox.setVelocity(10);
+		canvas.addKeyListener(BSandBox);
+		canvas.addGameObject(BSandBox);
+	
 
 	}
 

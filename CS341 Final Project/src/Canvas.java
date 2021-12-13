@@ -16,6 +16,11 @@ import javax.swing.JLabel;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 
+/**
+ * Creates a Canvas to draw GameObject on
+ * @author jtcha
+ *
+ */
 public class Canvas extends JComponent implements ActionListener, KeyListener{
 	private static final long serialVersionUID = 1L;
 	
@@ -24,11 +29,9 @@ public class Canvas extends JComponent implements ActionListener, KeyListener{
 	private Timer gameLoopTimer;
 	private List <GameObject> gameObjectList;
 	private int highlighted = 0;
-	private JLabel highlightLabel;
-	
-	//CONSTRUCTOR
+
 	/*
-	 * Defines the details of the Canvas & the initalizes the GameObjects which to include in it
+	 * Constructor that defines the details of the Canvas & the initalizes the GameObjects which to include in it
 	 */
 	public Canvas() {
 		//TASK 1: CREATE THE LIST OF GAME OBJECTS
@@ -54,7 +57,6 @@ public class Canvas extends JComponent implements ActionListener, KeyListener{
 		frame.setVisible(true);
 	}
 	
-	//METHOD: ADDING GAME OBJECT
 	/**
 	 * Adds GameObjects to the List, which are latter added to the Canvas
 	 * @param gObject Takes in a GameObject to add to the ArrayList
@@ -63,9 +65,9 @@ public class Canvas extends JComponent implements ActionListener, KeyListener{
 		gameObjectList.add(gObject);
 	}
 	
-	//METHOD PAINT
 	/**
-	 * 
+	 * Draws the GameObject graphic onto the Canvas
+	 * Highlights the GameObject that is currently selected
 	 * @param Takes in a Graphic of where to paint this Object
 	 */
 	public synchronized void paint(Graphics g) {
@@ -99,6 +101,10 @@ public class Canvas extends JComponent implements ActionListener, KeyListener{
 		
 	}
 	
+	/**
+	 * Switches the object that is highlighted, both visually and numerically, when the tab button is pressed
+	 * @param e Keeps tracks of the key that is pressed
+	 */
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == KeyEvent.VK_TAB) {
 			highlighted = highlighted + 1;

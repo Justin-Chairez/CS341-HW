@@ -8,8 +8,19 @@ import java.util.LinkedList;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
+/**
+ * Type C GameObject with restricted movement, going only LEFT and RIGHT
+ * Moves according to the key pressed when highlighted, and moves automatically when not highlighted
+ * @author jtcha
+ *
+ */
 public class Type_C_GameObject extends GameObject implements KeyListener {
 
+	/**
+	 * Constructor for the C GameObject. Creates imageList for the Object and calls the Super constructor from GameObject
+	 * @param x X cordinate for where to place on the Canvas
+	 * @param y Y Coordinate for where to place on the Canvas
+	 */
 	public Type_C_GameObject(int x, int y) {
 
 		super(x, y);
@@ -20,6 +31,11 @@ public class Type_C_GameObject extends GameObject implements KeyListener {
 		imageList.add(new ImageIcon("images/Type_C_Right.png"));
 	}
 
+	/**
+	 * Allows for the GameObject to move left and right, under the user's control when the object is highlighted
+	 * Moves the object automatically when not highlighted
+	 * @param C Takes in the Canvas Object in wich to draw the image
+	 */
 	public void move(Canvas c) {
 		Icon icon = getCurrentImage();
 
@@ -64,6 +80,9 @@ public class Type_C_GameObject extends GameObject implements KeyListener {
 		}
 	}
 
+	/**
+	 * Changes the image when a the object direction changes
+	 */
 	public void setImage() {
 		switch (getDirection()) {
 		case Direction.NONE:
@@ -80,7 +99,11 @@ public class Type_C_GameObject extends GameObject implements KeyListener {
 	public void keyTyped(KeyEvent e) {
 
 	}
-
+	
+	/**
+	 * Wwhen the object becomes highlighted, only moves the object when a key is pressed
+	 * @param e Keeps track of what key was released
+	 */
 	public void keyReleased(KeyEvent e) {
 		if (getHighLighted()) {
 			if (e.getKeyCode() != KeyEvent.VK_TAB) {
@@ -89,6 +112,10 @@ public class Type_C_GameObject extends GameObject implements KeyListener {
 		}
 	}
 
+	/**
+	 * Stops the image where it is at when it becomes highighted and moves in the direction of whatever key is pressed
+	 * @param e Keeps track of what key was released
+	 */
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_TAB) {
 			setDirection(Direction.NONE);
@@ -103,6 +130,11 @@ public class Type_C_GameObject extends GameObject implements KeyListener {
 		}
 	}
 	
+	/**
+	 * Draws a red highlight around the current image of the choosen object
+	 * @param C Takes in a component
+	 * @param Takes in a graphic
+	 */
 	@Override
 	public void highlight(Component c, Graphics g) {
 		Icon icon = imageList.get(currentImage);

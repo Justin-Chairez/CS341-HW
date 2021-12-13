@@ -28,9 +28,7 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 		Icon icon = getCurrentImage();
 
 		int iconHeight = icon.getIconHeight();
-		int iconWidth = icon.getIconWidth();
 		int canvasHeight = (int) c.getSize().getHeight();
-		int canvasWidth = (int) c.getSize().getWidth();
 
 		if (getHighLighted()) {
 			switch (getDirection()) {
@@ -38,7 +36,7 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 				setY(getY() - getVelocity());
 				if (getY() < 0) {
 					setY(0);
-					//setDirection(Direction.DOWN);
+					setDirection(Direction.DOWN);
 				}
 				break;
 			case Direction.DOWN:
@@ -96,6 +94,11 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 		}
 	}
 
+	/**
+	 * When Tab is pressed the object stops
+	 * When Up is pressed, the object begins to move upwards until limit
+	 * When the Down is pressed, the object begins to move downwards until limit
+	 */
 	public void keyPressed(KeyEvent e) {
 		if (e.getKeyCode() == KeyEvent.VK_TAB) {
 			setDirection(Direction.NONE);
@@ -109,7 +112,12 @@ public class Type_A_GameObject extends GameObject implements KeyListener {
 			}
 		}
 	}
-
+	
+	/**
+	 * Draws a red highlight around the current image of the choosen object
+	 * @param C Takes in a component
+	 * @param Takes in a graphic
+	 */
 	@Override
 	public void highlight (Component c, Graphics g) {
 		Icon icon = imageList.get(currentImage);

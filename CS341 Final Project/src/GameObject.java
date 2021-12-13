@@ -4,6 +4,11 @@ import java.util.List;
 
 import javax.swing.Icon;
 
+/**
+ * Creates an abstract GameObject for other GameType Object to inherient methods
+ * @author jtcha
+ *
+ */
 public abstract class GameObject {
 	
 	//DATA MEMBERS
@@ -32,6 +37,8 @@ public abstract class GameObject {
 	//ABSTRACT METHOD: MOVEMENT OF THE GAME OBJECT
 	public abstract void move (Canvas c);
 	public abstract void setImage();
+	
+	//Abstract method, that creates the highlight around the method
 	public abstract void highlight(Component c, Graphics g);
 
 	//SETTERS AND GETTERS
@@ -76,6 +83,7 @@ public abstract class GameObject {
 		return isHighlighted;
 	}
 	
+	//Keeps track if an Object is highlighted
 	public void setHighLighted(Boolean state)
 	{
 		isHighlighted = state;
