@@ -6,7 +6,7 @@ import java.awt.event.KeyEvent;
  * @author jtcha
  *
  */
-public interface BAdapterSB 
+public interface BAdapter 
 {
 	public void move(Canvas c);
 	public void setImage();

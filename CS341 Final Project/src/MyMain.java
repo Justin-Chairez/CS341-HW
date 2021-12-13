@@ -18,24 +18,11 @@ public class MyMain {
 		objD.setVelocity(10);
 		canvas.addKeyListener(objD);
 		canvas.addGameObject(objD);
-				
-		/*
-		Type_B_GameObject objB = new Type_B_GameObject(objA);
-		objB.setVelocity(10);
-		canvas.addKeyListener(objB);
-		canvas.addGameObject(objB);
-		
-		
-		Type_B_GameObject objB = new Type_B_GameObject(objA);
-		objB.setVelocity(10);
-		canvas.addKeyListener(objB);
-		canvas.addGameObject(objB);
-			*/
 
-		Type_B_SB BSandBox = new Type_B_SB(objA);
-		BSandBox.setVelocity(10);
-		canvas.addKeyListener(BSandBox);
-		canvas.addGameObject(BSandBox);
+		Type_B_GameObject objB = new Type_B_GameObject(objA);
+		objB.setVelocity(10);
+		canvas.addKeyListener(objB);
+		canvas.addGameObject(objB);
 	
 
 	}
